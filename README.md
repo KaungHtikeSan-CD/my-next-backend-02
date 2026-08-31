@@ -1,3 +1,22 @@
+# Next.js Item CRUD Backend
+
+This backend provides cookie-based JWT authentication and MongoDB item CRUD APIs.
+
+## Soft deletion
+
+`DELETE /api/item/:id` preserves the document and updates it with:
+
+```js
+{
+  status: "DELETED",
+  deletedAt: new Date(),
+  deletedBy: user.id,
+}
+```
+
+`GET /api/item` hides soft-deleted documents with the MongoDB condition
+`{ status: { $ne: "DELETED" } }`. New and updated documents use `status: "ACTIVE"`.
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
